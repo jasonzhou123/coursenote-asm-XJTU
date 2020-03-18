@@ -3,4 +3,4 @@
 
 同时不仅仅是文字，之后也会将asm的一些课程代码放上去。
 
-[第四章笔记](chapter4/https://github.com/jasonzhou123/coursenote-asm-XJTU/blob/master/chapter4/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0.md#3%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AF%AD%E6%B3%95)
+[第四章笔记](/chapter4/第四章总结笔记.md)
