@@ -1,0 +1,55 @@
+Turbo Assembler	 Version 5.0	    03-29-20 16:20:02	    Page 1
+rad8CB1D.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  AF 12 B3 CC		     ARRAY DB 0AFH,12H,0B3H,0CCH
+      3	0004  0003			     N DW $-ARRAY-1
+      4	0006			     DATA ENDS
+      5
+      6	0000			     CODE SEGMENT
+      7				      ASSUME CS: CODE, DS:DATA
+      8	0000  B8 0000s		     START: MOV	AX,DATA
+      9	0003  8E D8			     MOV DS,AX
+     10	0005  8B 0E 0004r		     MOV CX,N
+     11	0009  BE 0000r			     LEA SI,ARRAY
+     12	000C  8A 1C			     MOV BL,[SI]
+     13	000E  BA 0000			     MOV DX,0H
+     14	0011  8A C3		     LAB:  MOV AL,BL
+     15	0013  46			     INC SI
+     16	0014  8A 1C			     MOV BL,[SI]
+     17	0016  32 C3			     XOR AL,BL
+     18	0018  79 01			     JNS LAB2
+     19	001A  42			     INC DX
+     20	001B  E2 F4		     LAB2:   LOOP LAB
+     21
+     22	001D			     CODE ENDS
+     23				     END START
+Turbo Assembler	 Version 5.0	    03-29-20 16:20:02	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03-29-20"
+??FILENAME			  Text	 "rad8CB1D"
+??TIME				  Text	 "16:20:02"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RAD8CB1D
+@WORDSIZE			  Text	 2
+ARRAY				  Byte	 DATA:0000
+LAB				  Near16 CODE:0011
+LAB2				  Near16 CODE:001B
+N				  Word	 DATA:0004
+START				  Near16 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  001D Para	  none
+DATA				  16  0006 Para	  none
+
