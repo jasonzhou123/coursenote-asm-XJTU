@@ -1,0 +1,55 @@
+Turbo Assembler	 Version 5.0	    03-29-20 18:43:02	    Page 1
+radF588B.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  1278			     XL	DW 1278H
+      3	0002  8221			     XH	DW 8221H
+      4	0004  3A62			     Y DW 3A62H
+      5	0006  06*(??)			     Z DB 6 DUP(?)
+      6	000C			     DATA ENDS
+      7	0000			     CODE SEGMENT
+      8					     ASSUME CS:CODE,DS:DATA
+      9	0000  B8 0000s		     START: MOV	AX,DATA
+     10	0003  8E D8			     MOV DS,AX
+     11	0005  8B 0E 0004r		     MOV CX,Y
+     12	0009  A1 0000r			     MOV AX,XL
+     13	000C  BE 0006r			     LEA SI,Z
+     14	000F  F7 E1			     MUL CX
+     15	0011  89 04			     MOV [SI],AX
+     16	0013  8B DA			     MOV BX,DX
+     17	0015  A1 0002r			     MOV AX,XH
+     18	0018  F7 E1			     MUL CX
+     19	001A  03 C3			     ADD AX,BX
+     20	001C  89 44 02			     MOV [SI+2],AX
+     21	001F  89 54 04			     MOV [SI+4],DX
+     22	0022			     CODE ENDS
+     23				     END START
+Turbo Assembler	 Version 5.0	    03-29-20 18:43:02	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03-29-20"
+??FILENAME			  Text	 "radF588B"
+??TIME				  Text	 "18:43:02"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RADF588B
+@WORDSIZE			  Text	 2
+START				  Near16 CODE:0000
+XH				  Word	 DATA:0002
+XL				  Word	 DATA:0000
+Y				  Word	 DATA:0004
+Z				  Byte	 DATA:0006
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0022 Para	  none
+DATA				  16  000C Para	  none
+
