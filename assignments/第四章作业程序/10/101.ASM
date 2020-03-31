@@ -11,7 +11,7 @@ START: MOV AX,DATA
 	MOV AX,[SI]
 	MOV MAX,AX
 	MOV CX, M-1
-LAB:  CMP
+LAB:  CMP 
 	
 
 

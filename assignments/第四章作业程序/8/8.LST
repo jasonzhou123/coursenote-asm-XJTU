@@ -1,0 +1,71 @@
+Turbo Assembler	 Version 5.0	    03-31-20 09:56:32	    Page 1
+rad65F75.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  0A*(??)			     ZHISHU DB 10 DUP(?)
+      3	000A  0009			     N DW 09H
+      4	000C			     DATA ENDS
+      5	0000			     CODE SEGMENT
+      6					     ASSUME CS:CODE,DS:DATA
+      7	0000  B8 0000s		     START:MOV AX,DATA
+      8	0003  8E D8			     MOV DS,AX
+      9	0005  BA 0002			     MOV DX,2H
+     10	0008  8B 0E 000Ar		     MOV CX,N
+     11	000C  BE 0000r			     LEA SI,ZHISHU
+     12	000F  C7 04 0001		     MOV [SI],1H
+*Warning* rad65F75.ASM(12) Argument needs type override
+     13	0013  46			     INC SI
+     14	0014  42		     NEXT:   INC DX
+     15	0015  B3 01			     MOV BL,1H
+     16	0017  FE C3		     LAB:  INC BL
+     17	0019  8B C2			     MOV AX,DX
+     18	001B  32 D3			     XOR DL,BL
+     19	001D  74 0B			     JZ	FIND
+     20	001F  8B D0			     MOV DX,AX
+     21	0021  F6 F3			     DIV BL
+     22	0023  F6 C4 FF			     TEST AH, 0FFH
+     23	0026  74 EC			     JZ	NEXT
+     24	0028  EB ED			     JMP LAB
+     25	002A  88 04		     FIND: MOV [SI],AL
+     26	002C  8A D0			     MOV DL,AL
+     27	002E  46			     INC SI
+     28	002F  E2 E3			     LOOP NEXT
+     29	0031  B8 0001			     MOV AX,1H
+     30	0034			     CODE ENDS
+     31				     END START
+Turbo Assembler	 Version 5.0	    03-31-20 09:56:32	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03-31-20"
+??FILENAME			  Text	 "rad65F75"
+??TIME				  Text	 "09:56:32"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RAD65F75
+@WORDSIZE			  Text	 2
+FIND				  Near16 CODE:002A
+LAB				  Near16 CODE:0017
+N				  Word	 DATA:000A
+NEXT				  Near16 CODE:0014
+START				  Near16 CODE:0000
+ZHISHU				  Byte	 DATA:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0034 Para	  none
+DATA				  16  000C Para	  none
+Turbo Assembler	 Version 5.0	    03-31-20 09:56:32	    Page 3
+Error Summary
+
+
+
+*Warning* rad65F75.ASM(12) Argument needs type override
+
