@@ -1,0 +1,56 @@
+Turbo Assembler	 Version 5.0	    03-31-20 19:45:21	    Page 1
+rad97B1C.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  2312 1234	A122 7825	     NUM DW 2312H,1234H,0A122H,7825H
+      3	0008  0003			     M DW ($-NUM)/2-1
+      4	000A  ????			     MAX DW ?
+      5	000C			     DATA ENDS
+      6	0000			     CODE SEGMENT
+      7				     ASSUME CS:CODE,DS:DATA
+      8	0000  B8 0000s		     START: MOV	AX,DATA
+      9	0003  8E D8			     MOV DS,AX
+     10	0005  BE 0000r			     LEA SI,NUM
+     11	0008  8B 04			     MOV AX,[SI]
+     12	000A  A3 000Ar			     MOV MAX,AX
+     13	000D  8B 0E 0008r		     MOV CX, M
+     14	0011  BE 0000r			     LEA SI,NUM
+     15	0014  83 C6 02		     LAB:  ADD SI,2H
+     16	0017  8B 04			     MOV AX,[SI]
+     17	0019  3B 06 000Ar		     CMP AX,MAX
+     18	001D  76 03			     JBE NEXT
+     19	001F  A3 000Ar			     MOV MAX,AX
+     20	0022  E2 F0		     NEXT: LOOP	LAB
+     21	0024  EB FE			     JMP $
+     22	0026			     CODE ENDS
+     23				     END START
+Turbo Assembler	 Version 5.0	    03-31-20 19:45:21	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03-31-20"
+??FILENAME			  Text	 "rad97B1C"
+??TIME				  Text	 "19:45:21"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RAD97B1C
+@WORDSIZE			  Text	 2
+LAB				  Near16 CODE:0014
+M				  Word	 DATA:0008
+MAX				  Word	 DATA:000A
+NEXT				  Near16 CODE:0022
+NUM				  Word	 DATA:0000
+START				  Near16 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0026 Para	  none
+DATA				  16  000C Para	  none
+

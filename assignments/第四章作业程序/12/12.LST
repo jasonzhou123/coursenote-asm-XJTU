@@ -1,0 +1,57 @@
+Turbo Assembler	 Version 5.0	    03-31-20 21:53:31	    Page 1
+rad95DC9.ASM
+
+
+
+      1	0000			     DES SEGMENT
+      2	0000  50 4F 54 41 54 4F		     STRING1 DB	'POTATO'
+      3	0006			     DES ENDS
+      4	0000			     SOU SEGMENT
+      5	0000  50 4F 54 41 54 41		     STRING2 DB	'POTATA'
+      6	0006			     SOU ENDS
+      7	0000			     CODE SEGMENT
+      8					     ASSUME CS:CODE,DS:SOU,ES:DES
+      9	0000  B8 0000s		     START: MOV	AX,DES
+     10	0003  8E C0			     MOV ES,AX
+     11	0005  B8 0000s			     MOV AX,SOU
+     12	0008  8E D8			     MOV DS,AX
+     13	000A  B9 0006			     MOV CX,6
+     14	000D  BF 0000r			     LEA DI,STRING1
+     15	0010  BE 0000r			     LEA SI,STRING2
+     16	0013  FC			     CLD
+     17	0014  F3> A6			     REPZ CMPSB
+     18	0016  75 05			     JNZ LAB
+     19	0018  B0 01			     MOV AL,1
+     20	001A  EB 03 90			     JMP DONE
+     21	001D  B0 00		     LAB:  MOV AL,0
+     22	001F  EB FE		     DONE: JMP $
+     23	0021			     CODE ENDS
+     24				     END START
+Turbo Assembler	 Version 5.0	    03-31-20 21:53:31	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03-31-20"
+??FILENAME			  Text	 "rad95DC9"
+??TIME				  Text	 "21:53:31"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RAD95DC9
+@WORDSIZE			  Text	 2
+DONE				  Near16 CODE:001F
+LAB				  Near16 CODE:001D
+START				  Near16 CODE:0000
+STRING1				  Byte	 DES:0000
+STRING2				  Byte	 SOU:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0021 Para	  none
+DES				  16  0006 Para	  none
+SOU				  16  0006 Para	  none
+

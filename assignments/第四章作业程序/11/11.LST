@@ -1,0 +1,78 @@
+Turbo Assembler	 Version 5.0	    03-31-20 21:08:40	    Page 1
+rad44758.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  12 A7 56 C1 77 B3		     ARRAY DB 12H,0A7H,56H,0C1H,77H,0B3H
+      3	0006  0006			     N DW $-ARRAY
+      4	0008  0A*(??)			     PN	DB 10 DUP(?)
+      5	0012  0A*(??)			     NN	DB 10 DUP(?)
+      6	001C			     DATA ENDS
+      7	0000			     STACK_SEG SEGMENT STACK
+      8	0000  0A*(??)			     DB	10 DUP(?)
+      9	000A			     STACK_SEG ENDS
+     10
+     11	0000			     CODE SEGMENT
+     12					     ASSUME CS:CODE,DS:DATA
+     13	0000  B8 0000s		     START: MOV	AX,DATA
+     14	0003  8E D8			     MOV DS,AX
+     15	0005  BE 0000r			     LEA SI,ARRAY
+     16	0008  BA 0008r			     LEA DX,PN
+     17	000B  BB 0012r			     LEA BX,NN
+     18	000E  8B 0E 0006r		     MOV CX,N
+     19	0012  8A 04		     NEXT: MOV AL,[SI]
+     20	0014  46			     INC SI
+     21	0015  A8 80			     TEST AL,80H
+     22	0017  75 0A			     JNZ NE
+     23	0019  53			     PUSH BX
+     24	001A  8B DA			     MOV BX,DX
+     25	001C  88 07			     MOV [BX],AL
+     26	001E  42			     INC DX
+     27	001F  5B			     POP BX
+     28	0020  EB 04 90			     JMP LAB
+     29	0023  88 07		     NE:     MOV [BX],AL
+*Warning* rad44758.ASM(29) Reserved word used as symbol: NE
+     30	0025  43			     INC BX
+     31	0026  E2 EA		     LAB:    LOOP NEXT
+     32	0028  EB FE			     JMP $
+     33	002A			     CODE ENDS
+     34
+     35				     END START
+Turbo Assembler	 Version 5.0	    03-31-20 21:08:40	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03-31-20"
+??FILENAME			  Text	 "rad44758"
+??TIME				  Text	 "21:08:40"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RAD44758
+@WORDSIZE			  Text	 2
+ARRAY				  Byte	 DATA:0000
+LAB				  Near16 CODE:0026
+N				  Word	 DATA:0006
+NE				  Near16 CODE:0023
+NEXT				  Near16 CODE:0012
+NN				  Byte	 DATA:0012
+PN				  Byte	 DATA:0008
+START				  Near16 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  002A Para	  none
+DATA				  16  001C Para	  none
+STACK_SEG			  16  000A Para	  Stack
+Turbo Assembler	 Version 5.0	    03-31-20 21:08:40	    Page 3
+Error Summary
+
+
+
+*Warning* rad44758.ASM(29) Reserved word used as symbol: NE
+
