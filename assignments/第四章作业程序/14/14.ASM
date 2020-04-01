@@ -1,0 +1,18 @@
+CODE SEGMENT
+	ASSUME CS:CODE
+START: MOV AH, 25H
+	MOV AL,41H
+	MOV DX, SEG myInt; myInt是中断处理程序名称
+	MOV DS, DX
+	MOV DX, OFFSET myInt
+	INT 21H
+	MOV AH, 31H
+	MOV AL, 86 ;返回码自己设置，就是Exit code
+	MOV DX, 200H 	
+	INT 21H
+myInt PROC FAR
+	MOV AX,0H
+myInt	ENDP
+
+CODE ENDS
+END START 

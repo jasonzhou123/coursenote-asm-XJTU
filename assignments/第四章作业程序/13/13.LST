@@ -1,0 +1,140 @@
+Turbo Assembler	 Version 5.0	    04-01-20 14:44:04	    Page 1
+radA68BA.ASM
+
+
+
+      1				     ADDALL MACRO X1_ADD,X2_ADD,Z_ADD,N	;nÎª×Ö½ÚÊý
+      2					     PUSH SI
+      3					     PUSH DI
+      4					     PUSH AX
+      5					     PUSH BX
+      6					     PUSH CX
+      7					     PUSH DX
+      8					     MOV SI,X1_ADD
+      9					     MOV DI,X2_ADD
+     10					     MOV CX,N
+     11					     MOV DL,0H
+     12					     MOV BX,Z_ADD
+     13					     PUSH BX
+     14				     NEXT:   MOV AL,DS:[SI]
+     15					     MOV BL,DS:[DI]
+     16					     ADD AL,DL
+     17					     MOV DL,0H
+     18					     ADD AL,BL
+     19					     POP BX
+     20					     MOV [BX],AL
+     21					     INC BX
+     22					     PUSH BX
+     23					     MOV Z_ADD,BX
+     24					     JNC LAB
+     25					     INC DL
+     26				     LAB:  INC SI
+     27					     INC DI
+     28					     LOOP NEXT
+     29					     POP BX
+     30					     POP DX
+     31					     POP CX
+     32					     POP BX
+     33					     POP AX
+     34					     POP DI
+     35					     POP SI
+     36
+     37				     ENDM
+     38
+     39	0000			     DATA SEGMENT
+     40	0000  00 00			     Z1	DB 00H,00H
+     41	0002  0000r			     Z_ADD DW Z1
+     42	0004  11 11			     X1	DB 11H,11H
+     43	0006  12 11			     X2	DB 12H,11H
+     44	0008  0004r			     X1_ADD DW X1
+     45	000A  0006r			     X2_ADD DW X2
+     46	000C  0002			     N DW 2
+     47	000E			     DATA ENDS
+     48
+     49	0000			     STA SEGMENT STACK
+     50	0000  1E*(??)			     DB	30 DUP(?)
+     51	001E			     STA ENDS
+     52	0000			     CODE SEGMENT
+     53				     ASSUME CS:CODE,DS:	DATA,SS:STA
+     54	0000  B8 0000s		     START:MOV AX,DATA
+     55	0003  8E D8			     MOV DS,AX
+     56					     ADDALL X1_ADD,X2_ADD,Z_ADD,N
+1    57	0005  56			     PUSH SI
+Turbo Assembler	 Version 5.0	    04-01-20 14:44:04	    Page 2
+radA68BA.ASM
+
+
+
+1    58	0006  57			     PUSH DI
+1    59	0007  50			     PUSH AX
+1    60	0008  53			     PUSH BX
+1    61	0009  51			     PUSH CX
+1    62	000A  52			     PUSH DX
+1    63	000B  8B 36 0008r		     MOV SI,X1_ADD
+1    64	000F  8B 3E 000Ar		     MOV DI,X2_ADD
+1    65	0013  8B 0E 000Cr		     MOV CX,N
+1    66	0017  B2 00			     MOV DL,0H
+1    67	0019  8B 1E 0002r		     MOV BX,Z_ADD
+1    68	001D  53			     PUSH BX
+1    69	001E  8A 04		     NEXT:   MOV AL,DS:[SI]
+1    70	0020  8A 1D			     MOV BL,DS:[DI]
+1    71	0022  02 C2			     ADD AL,DL
+1    72	0024  B2 00			     MOV DL,0H
+1    73	0026  02 C3			     ADD AL,BL
+1    74	0028  5B			     POP BX
+1    75	0029  88 07			     MOV [BX],AL
+1    76	002B  43			     INC BX
+1    77	002C  53			     PUSH BX
+1    78	002D  89 1E 0002r		     MOV Z_ADD,BX
+1    79	0031  73 02			     JNC LAB
+1    80	0033  FE C2			     INC DL
+1    81	0035  46		     LAB:  INC SI
+1    82	0036  47			     INC DI
+1    83	0037  E2 E5			     LOOP NEXT
+1    84	0039  5B			     POP BX
+1    85	003A  5A			     POP DX
+1    86	003B  59			     POP CX
+1    87	003C  5B			     POP BX
+1    88	003D  58			     POP AX
+1    89	003E  5F			     POP DI
+1    90	003F  5E			     POP SI
+     91	0040  EB FE			     JMP $
+     92	0042			     CODE ENDS
+     93				     END START
+Turbo Assembler	 Version 5.0	    04-01-20 14:44:04	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04-01-20"
+??FILENAME			  Text	 "radA68BA"
+??TIME				  Text	 "14:44:04"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RADA68BA
+@WORDSIZE			  Text	 2
+LAB				  Near16 CODE:0035
+N				  Word	 DATA:000C
+NEXT				  Near16 CODE:001E
+START				  Near16 CODE:0000
+X1				  Byte	 DATA:0004
+X1_ADD				  Word	 DATA:0008
+X2				  Byte	 DATA:0006
+X2_ADD				  Word	 DATA:000A
+Z1				  Byte	 DATA:0000
+Z_ADD				  Word	 DATA:0002
+
+Macro Name
+
+ADDALL
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0042 Para	  none
+DATA				  16  000E Para	  none
+STA				  16  001E Para	  Stack
+

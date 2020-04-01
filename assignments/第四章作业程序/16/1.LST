@@ -1,0 +1,35 @@
+Turbo Assembler	 Version 5.0	    04-01-20 17:43:38	    Page 1
+radDDFE2.ASM
+
+
+
+      1	0000			     CODE SEGMENT
+      2				     ASSUME CS:CODE
+      3	0000  B8 0000		     START:  MOV AX,0000H
+      4	0003  B0 31			     MOV AL,'1'
+      5	0005  EB FE			     JMP $
+      6
+      7	0007			     CODE ENDS
+      8				     END START
+Turbo Assembler	 Version 5.0	    04-01-20 17:43:38	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04-01-20"
+??FILENAME			  Text	 "radDDFE2"
+??TIME				  Text	 "17:43:38"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RADDDFE2
+@WORDSIZE			  Text	 2
+START				  Near16 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0007 Para	  none
+

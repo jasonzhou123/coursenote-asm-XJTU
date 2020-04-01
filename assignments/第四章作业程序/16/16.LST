@@ -1,0 +1,99 @@
+Turbo Assembler	 Version 5.0	    04-01-20 17:57:35	    Page 1
+radF3F10.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  50 41 53 53 57 4F	52+	     STRING DB 'PASSWORD:$'
+      3	      44 3A 24
+      4	000A  2A			     DISPLAY DB	'*'
+*Warning* radF3F10.ASM(3) Reserved word	used as	symbol:	DISPLAY
+      5	000B  04*(??)			     INPUT DB 4	DUP(?)
+      6	000F  48 45 4C 4C 4F 21	24	     HELLO DB 'HELLO!$'
+      7	0016  53 4F 52 52 59 21	24	     SORRY DB 'SORRY!$'
+      8	001D			     DATA ENDS
+      9	0000			     CORRECT SEGMENT
+     10	0000  31 31 31 31		     MYCODE DB '1111'
+     11	0004  0004			     N DW $ - MYCODE
+     12	0006			     CORRECT ENDS
+     13	0000			     STASEG SEGMENT STACK
+     14	0000  0A*(??)			     DB	10 DUP(?)
+     15	000A			     STASEG ENDS
+     16	0000			     CODE SEGMENT
+     17					     ASSUME CS:CODE,DS:DATA,SS:STASEG,ES:CORRECT
+     18	0000  B8 0000s		     START: MOV	AX,DATA
+     19	0003  8E D8			     MOV DS,AX
+     20	0005  B8 0000s			     MOV AX,CORRECT
+     21	0008  8E C0			     MOV ES,AX
+     22	000A  26: 8B 0E	0004r		     MOV CX, N
+     23	000F  BE 000Br			     MOV SI,OFFSET INPUT
+     24	0012  8B DE			     MOV BX,SI
+     25	0014  BA 0000r			     MOV DX, OFFSET STRING
+     26	0017  B4 09			     MOV AH,09H
+     27	0019  CD 21			     INT 21H
+     28	001B  8A 16 000Ar		     MOV DL,DISPLAY
+     29	001F  B4 07		     NEXT:   MOV AH,07H
+     30	0021  CD 21			     INT 21H
+     31	0023  88 04			     MOV DS:[SI],AL
+     32	0025  46			     INC SI
+     33	0026  B4 02			     MOV AH,02H
+     34	0028  8A 16 000Ar		     MOV DL,DISPLAY
+     35	002C  CD 21			     INT 21H
+     36	002E  E2 EF			     LOOP NEXT
+     37	0030  8B F3			     MOV SI,BX
+     38	0032  BF 0000r			     MOV DI,OFFSET MYCODE
+     39	0035  B9 0004			     MOV CX,4H
+     40	0038  FC			     CLD
+     41	0039  F3> A6			     REPZ CMPSB
+     42	003B  75 0A			     JNZ WRONG
+     43	003D  BA 000Fr			     MOV DX, OFFSET HELLO
+     44	0040  B4 09			     MOV AH,09H
+     45	0042  CD 21			     INT 21H
+     46	0044  EB 08 90			     JMP DONE
+     47	0047  BA 0016r		     WRONG:MOV DX, OFFSET SORRY
+     48	004A  B4 09			     MOV AH,09H
+     49	004C  CD 21			     INT 21H
+     50	004E  EB FE		     DONE:   JMP $
+     51	0050			     CODE ENDS
+     52				     END START
+Turbo Assembler	 Version 5.0	    04-01-20 17:57:35	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04-01-20"
+??FILENAME			  Text	 "radF3F10"
+??TIME				  Text	 "17:57:35"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RADF3F10
+@WORDSIZE			  Text	 2
+DISPLAY				  Byte	 DATA:000A
+DONE				  Near16 CODE:004E
+HELLO				  Byte	 DATA:000F
+INPUT				  Byte	 DATA:000B
+MYCODE				  Byte	 CORRECT:0000
+N				  Word	 CORRECT:0004
+NEXT				  Near16 CODE:001F
+SORRY				  Byte	 DATA:0016
+START				  Near16 CODE:0000
+STRING				  Byte	 DATA:0000
+WRONG				  Near16 CODE:0047
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0050 Para	  none
+CORRECT				  16  0006 Para	  none
+DATA				  16  001D Para	  none
+STASEG				  16  000A Para	  Stack
+Turbo Assembler	 Version 5.0	    04-01-20 17:57:35	    Page 3
+Error Summary
+
+
+
+*Warning* radF3F10.ASM(3) Reserved word	used as	symbol:	DISPLAY
+
