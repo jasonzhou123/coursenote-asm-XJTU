@@ -1,0 +1,53 @@
+Turbo Assembler	 Version 5.0	    04-02-20 21:45:41	    Page 1
+rad15612.ASM
+
+
+
+      1	0000			     DATA SEGMENT
+      2	0000  01			     N DB 1H
+      3	0001			     DATA ENDS
+      4	0000			     CODE SEGMENT
+      5					     ASSUME CS:CODE,DS:DATA
+      6	0000			     START:
+      7	0000  B8 0000s			     MOV AX,DATA
+      8	0003  8E D8			     MOV DS,AX
+      9	0005  B4 25			     MOV AH, 25H
+     10	0007  B0 42			     MOV AL, 42H ;设置中断号
+     11	0009  BA 0000s			     MOV DX, SEG myInt;	myInt是中断处理程序名称
+     12	000C  8E DA			     MOV DS, DX
+     13	000E  BA 0015r			     MOV DX, OFFSET myInt
+     14	0011  CD 21			     INT 21H
+     15	0013  EB FE			     JMP $
+     16
+     17	0015			     myInt PROC	FAR
+     18	0015  B8 0000			     MOV AX,0H
+     19	0018  CF			     IRET
+     20	0019			     myInt   ENDP
+     21
+     22	0019			     CODE ENDS
+     23				     END START
+Turbo Assembler	 Version 5.0	    04-02-20 21:45:41	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04-02-20"
+??FILENAME			  Text	 "rad15612"
+??TIME				  Text	 "21:45:41"
+??VERSION			  Number 0500
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 RAD15612
+@WORDSIZE			  Text	 2
+MYINT				  Far16	 CODE:0015
+N				  Byte	 DATA:0000
+START				  Near16 CODE:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0019 Para	  none
+DATA				  16  0001 Para	  none
+

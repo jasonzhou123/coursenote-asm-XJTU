@@ -1,5 +1,5 @@
-Turbo Assembler	 Version 5.0	    04-01-20 16:45:10	    Page 1
-rad943E4.ASM
+Turbo Assembler	 Version 5.0	    04-02-20 21:36:06	    Page 1
+radBCFB5.ASM
 
 
 
@@ -7,23 +7,23 @@ rad943E4.ASM
       2					     ASSUME CS:CODE
       3	0000  B4 25		     START: MOV	AH, 25H
       4	0002  B0 41			     MOV AL,41H
-      5	0004  2E: 8B 16	0018r		     MOV DX, myInt; myInt是中断处理程序名称
-**Error** rad943E4.ASM(5) Operand types	do not match
-      6	0008  8E DA			     MOV DS, DX
-      7	000A  BA 0018r			     MOV DX, OFFSET myInt
-      8	000D  CD 21			     INT 21H
-      9	000F  B4 31			     MOV AH, 31H
-     10	0011  B0 56			     MOV AL, 86	;返回码自己设置，就是Exit code
-     11	0013  BA 0200			     MOV DX, 200H
-     12	0016  CD 21			     INT 21H
-     13
-     14	0018			     myInt PROC	FAR
-     15	0018  B8 0000			     MOV AX,0H
-     16	001B			     myInt   ENDP
-     17
-     18	001B			     CODE ENDS
-     19				     END START
-Turbo Assembler	 Version 5.0	    04-01-20 16:45:10	    Page 2
+      5	0004  BA 0000s			     MOV DX, SEG myInt;	myInt是中断处理程序名称
+      6	0007  8E DA			     MOV DS, DX
+      7	0009  BA 0019r			     MOV DX, OFFSET myInt
+      8	000C  CD 21			     INT 21H
+      9	000E  B4 31			     MOV AH, 31H
+     10	0010  B0 56			     MOV AL, 86	;返回码自己设置，就是Exit code
+     11	0012  BA 0200			     MOV DX, 200H
+     12	0015  CD 21			     INT 21H
+     13	0017  EB FE			     JMP $
+     14	0019			     myInt PROC	FAR
+     15	0019  B8 0000			     MOV AX,0H
+     16	001C  CB			     RET
+     17	001D			     myInt   ENDP
+     18
+     19	001D			     CODE ENDS
+     20				     END START
+Turbo Assembler	 Version 5.0	    04-02-20 21:36:06	    Page 2
 Symbol Table
 
 
@@ -31,24 +31,18 @@ Symbol Table
 
 Symbol Name			  Type	 Value
 
-??DATE				  Text	 "04-01-20"
-??FILENAME			  Text	 "rad943E4"
-??TIME				  Text	 "16:45:10"
+??DATE				  Text	 "04-02-20"
+??FILENAME			  Text	 "radBCFB5"
+??TIME				  Text	 "21:36:06"
 ??VERSION			  Number 0500
 @CPU				  Text	 0101H
 @CURSEG				  Text	 CODE
-@FILENAME			  Text	 RAD943E4
+@FILENAME			  Text	 RADBCFB5
 @WORDSIZE			  Text	 2
-MYINT				  Far16	 CODE:0018
+MYINT				  Far16	 CODE:0019
 START				  Near16 CODE:0000
 
 Groups & Segments		  Bit Size Align  Combine Class
 
-CODE				  16  001B Para	  none
-Turbo Assembler	 Version 5.0	    04-01-20 16:45:10	    Page 3
-Error Summary
-
-
-
-**Error** rad943E4.ASM(5) Operand types	do not match
+CODE				  16  001D Para	  none
 
